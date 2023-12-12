@@ -1,14 +1,17 @@
 import 'package:bahasaku/src/Theme/TColors.dart';
-import 'package:bahasaku/src/models/question_model.dart';
-import 'package:bahasaku/src/provider/current_question.dart';
+import 'package:bahasaku/src/provider/current_test.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class AnswerButton extends StatefulWidget {
-  final Answer answer;
+  final String choice;
+  final String answer;
   final bool isSelected;
   const AnswerButton(
-      {super.key, required this.answer, required this.isSelected});
+      {super.key,
+      required this.choice,
+      required this.answer,
+      required this.isSelected});
 
   @override
   State<AnswerButton> createState() => _AnswerButtonState();
@@ -32,19 +35,15 @@ class _AnswerButtonState extends State<AnswerButton> {
         child: ElevatedButton(
           onPressed: () {
             Provider.of<CurrentTest>(context, listen: false)
-                .updateAnswerSelected(widget.answer);
-            bool isCorrect = Provider.of<CurrentTest>(context, listen: false)
-                .selectedAnswer!
-                .isCorrect;
+                .updateAnswerSelected(widget.choice);
+            bool isCorrect = widget.answer == widget.choice;
             Provider.of<CurrentTest>(context, listen: false)
                 .updateResult(isCorrect);
           },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(8),
             primary: widget.isSelected
-                ? (Provider.of<CurrentTest>(context, listen: false)
-                        .selectedAnswer!
-                        .isCorrect
+                ? (widget.choice == widget.answer
                     ? TColors.successColor
                     : TColors.dangerColor)
                 : TColors.primaryColor,
@@ -53,7 +52,7 @@ class _AnswerButtonState extends State<AnswerButton> {
             ),
           ),
           child: Text(
-            widget.answer.answerText,
+            widget.choice,
             style: const TextStyle(color: Colors.white),
           ),
         ));

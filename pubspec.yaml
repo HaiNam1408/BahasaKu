@@ -25,6 +25,7 @@ dependencies:
   flutter_svg: ^2.0.9
   cupertino_icons: ^1.0.2
   provider: ^6.1.1
+  flutter_tts: ^3.8.5
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +58,7 @@ flutter:
           weight: 900
 
   assets:
+    - assets/fakedata.json
     - assets/icon/Binoculars.svg
     - assets/icon/BookOpenText.svg
     - assets/icon/Trophy.svg
@@ -86,6 +88,7 @@ flutter:
     - assets/images/setting.png
     - assets/images/Vector 3.png
     - assets/images/EmptyState.png
+    - assets/images/LogoSplash.png
 
   uses-material-design: true
 

@@ -1,0 +1,60 @@
+{
+  "questions": [
+    {
+      "type": "multiple-choice",
+      "title": "What does the picture mean?",
+      "image": "assets/images/IlustrationTestPageSuccess.png",
+      "choices": ["Mouth", "Ear", "Nose", "Eyes"],
+      "answer": "Nose"
+    },
+    {
+      "type": "multiple-choice",
+      "title": "These address should be listed in ____ order.",
+      "choices": ["alphabet", "alphabetize", "alphabetically", "alphabetical"],
+      "answer": "alphabetical"
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Employees dislike tasks that are ____.",
+      "choices": ["repeat", "repetitive", "repetition", "repetitively"],
+      "answer": "repetitive"
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Mr.Nodle called to cancel his ____.",
+      "choices": ["notebook", "calender", "appointment", "notice"],
+      "answer": "appointment"
+    },
+    {
+      "type": "multiple-choice",
+      "title": "The last train to Hamburg ____ at 10:30.",
+      "choices": ["depart", "departs", "to depart", "departing"],
+      "answer": "departs"
+    },
+    {
+      "type": "multiple-choice",
+      "title": "Is the annual report ____ yet?",
+      "choices": ["avail", "available", "availability", "availing"],
+      "answer": "available"
+    },
+    {
+      "type": "translate",
+      "title": "What's the meaning of this sentence?",
+      "sentence": "Do you want a piece of me?",
+      "answer": "Mày muốn ăn đấm không?"
+    },
+    {
+      "type": "translate",
+      "title": "What's the meaning of this sentence?",
+      "sentence": "Nam is the best person on this earth",
+      "answer": "Nam là người tốt nhất trên trái đất này"
+    },
+    {
+      "type": "translate",
+      "title": "What's the meaning of this sentence?",
+      "sentence": "How far is forever?",
+      "answer": "Mãi mãi là bao xa?"
+    }
+  ]
+
+}

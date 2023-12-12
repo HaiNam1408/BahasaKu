@@ -1,5 +1,6 @@
-import 'package:bahasaku/src/provider/current_question.dart';
+import 'package:bahasaku/src/provider/current_test.dart';
 import 'package:bahasaku/src/views/home_page/home_page.dart';
+import 'package:bahasaku/src/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Lexend'),
-        home: const HomePage(),
+        home: const SplashScreen(),
       ),
     );
   }
