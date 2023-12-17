@@ -2,8 +2,9 @@ import 'package:bahasaku/src/Theme/TColors.dart';
 import 'package:bahasaku/src/models/question_model.dart';
 import 'package:bahasaku/src/provider/current_test.dart';
 import 'package:bahasaku/src/utils/constant.dart';
-import 'package:bahasaku/src/views/test_page/widgets/check_circle.dart';
+import 'package:bahasaku/src/utils/play_sound.dart';
 import 'package:bahasaku/src/views/test_page/widgets/check_button.dart';
+import 'package:bahasaku/src/views/test_page/widgets/check_circle.dart';
 import 'package:bahasaku/src/views/test_page/widgets/next_button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,19 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
       bool isCorrect =
           textValue.trim().toLowerCase() == answer.trim().toLowerCase();
       Provider.of<CurrentTest>(context, listen: false).updateResult(isCorrect);
+      // Play sound
+      if (isCorrect) {
+        PlaySound.correctAnswer();
+      } else {
+        PlaySound.wrongAnswer();
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    textarea.dispose();
+    super.dispose();
   }
 
   @override
@@ -131,7 +144,12 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
             right: 0,
             child: Provider.of<CurrentTest>(context).result == null
                 ? CheckButton(onTap: checkAnswer)
-                : NextButton(question: widget.question, onTap: widget.onTap))
+                : NextButton(
+                    question: widget.question,
+                    onTap: () {
+                      widget.onTap();
+                      textarea.clear();
+                    }))
       ],
     );
   }

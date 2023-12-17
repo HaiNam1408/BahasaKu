@@ -3,9 +3,9 @@ import 'package:bahasaku/src/views/achievement_page/achievement_page.dart';
 import 'package:bahasaku/src/views/learn_page/learn_page.dart';
 import 'package:bahasaku/src/views/profile_page/profile_page.dart';
 import 'package:bahasaku/src/views/search_page/search_page.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 class HomePage extends StatefulWidget {
   final int pageIndex;

@@ -1,8 +1,8 @@
 import 'package:bahasaku/src/Theme/TColors.dart';
 import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/views/learn_page/widgets/cell_course.dart';
-import 'package:bahasaku/src/views/learn_page/widgets/small_earning.dart';
 import 'package:bahasaku/src/views/learn_page/widgets/learn_banner.dart';
+import 'package:bahasaku/src/views/learn_page/widgets/small_earning.dart';
 import 'package:flutter/material.dart';
 
 class LearnPage extends StatefulWidget {

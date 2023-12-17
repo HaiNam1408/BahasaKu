@@ -1,7 +1,7 @@
 import 'package:bahasaku/src/Theme/TColors.dart';
-import 'package:bahasaku/src/utils/constant.dart';
-import 'package:bahasaku/src/common_widgets/prev_button.dart';
 import 'package:bahasaku/src/common_widgets/action_button.dart';
+import 'package:bahasaku/src/common_widgets/prev_button.dart';
+import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/views/learning_page/widgets/learn_now_button.dart';
 import 'package:bahasaku/src/views/learning_page/widgets/level_card.dart';
 import 'package:flutter/material.dart';

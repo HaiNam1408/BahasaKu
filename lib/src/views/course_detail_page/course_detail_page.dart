@@ -1,10 +1,11 @@
+import 'package:bahasaku/src/common_widgets/circle_indicator.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
 import 'package:bahasaku/src/utils/constant.dart';
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:percent_indicator/percent_indicator.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CourseDetailPage extends StatefulWidget {
   const CourseDetailPage({super.key});
@@ -88,20 +89,18 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        IntrinsicHeight(
+                        const IntrinsicHeight(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-                              const Column(
+                              Column(
                                 children: [
                                   Icon(
                                     Icons.people,
                                     size: 35,
                                     color: Colors.grey,
                                   ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
+                                  SizedBox(height: 10),
                                   Text(
                                     '120',
                                     style: TextStyle(
@@ -110,38 +109,23 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                                   )
                                 ],
                               ),
-                              const VerticalDivider(
-                                  color: Colors.grey, width: 10),
+                              VerticalDivider(color: Colors.grey, width: 10),
                               Column(
                                 children: [
                                   SizedBox(
                                     width: 40,
                                     height: 40,
                                     child: SingleChildScrollView(
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      child: CircularPercentIndicator(
-                                        radius: 20,
-                                        lineWidth: 4,
-                                        percent: 0.8,
-                                        center: const Text(
-                                          '80%',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 9),
-                                        ),
-                                        progressColor: const Color(0xff69B85E),
-                                        backgroundColor:
-                                            const Color(0xffF2F2F7),
-                                        circularStrokeCap:
-                                            CircularStrokeCap.round,
-                                      ),
-                                    ),
+                                        physics: NeverScrollableScrollPhysics(),
+                                        child: CircleIndicator(
+                                          radius: 20,
+                                          lineWidth: 4,
+                                          percent: 0.8,
+                                          fontSize: 9,
+                                        )),
                                   ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  const Text(
+                                  SizedBox(height: 5),
+                                  Text(
                                     'Progress',
                                     style: TextStyle(
                                         fontSize: 13,
@@ -149,9 +133,8 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                                   )
                                 ],
                               ),
-                              const VerticalDivider(
-                                  color: Colors.grey, width: 10),
-                              const Column(
+                              VerticalDivider(color: Colors.grey, width: 10),
+                              Column(
                                 children: [
                                   Icon(
                                     Icons.favorite_border,
@@ -167,9 +150,8 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                                   )
                                 ],
                               ),
-                              const VerticalDivider(
-                                  color: Colors.grey, width: 10),
-                              const Column(
+                              VerticalDivider(color: Colors.grey, width: 10),
+                              Column(
                                 children: [
                                   Icon(
                                     Icons.menu,
@@ -190,17 +172,13 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 30,
-                        ),
+                        const SizedBox(height: 30),
                         const Text(
                           'Description',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),
-                        const SizedBox(
-                          height: 15,
-                        ),
+                        const SizedBox(height: 15),
                         SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: 200,
@@ -212,9 +190,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                                 fontWeight: FontWeight.w500),
                           ),
                         ),
-                        const SizedBox(
-                          height: 50,
-                        ),
+                        const SizedBox(height: 50),
                         SizedBox(
                           width: getWidth(context),
                           child: ElevatedButton(

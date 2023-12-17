@@ -31,13 +31,12 @@ class ModelSwitchAccount extends StatelessWidget {
                       ))
                 ],
               ),
+              const SizedBox(height: 8),
               const Text(
-                'Choose Account to Continue',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                'Choose Your Account',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 16),
               Container(
                 width: getWidth(context),
                 decoration: BoxDecoration(

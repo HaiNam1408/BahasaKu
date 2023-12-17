@@ -26,6 +26,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.1.1
   flutter_tts: ^3.8.5
+  just_audio: ^0.9.36
+  validators: ^3.0.0
+
 
 dev_dependencies:
   flutter_test:
@@ -58,37 +61,10 @@ flutter:
           weight: 900
 
   assets:
+    - assets/sounds/
     - assets/fakedata.json
-    - assets/icon/Binoculars.svg
-    - assets/icon/BookOpenText.svg
-    - assets/icon/Trophy.svg
-    - assets/icon/UserCircle.svg
-    - assets/icon/PlayButton.svg
-    - assets/icon/Fire.svg
-    - assets/icon/BookBookmark.svg
-    - assets/icon/Handshake.svg
-    - assets/icon/SpeakerSimpleHigh.svg
-    - assets/images/IlustrationHomePage.png
-    - assets/images/IlustrationLearning.png
-    - assets/images/IlustrationTestPageSuccess.png
-    - assets/images/Person.png
-    - assets/images/image1.png
-    - assets/images/image2.png
-    - assets/images/image3.png
-    - assets/images/Group256.png
-    - assets/images/Group257.png
-    - assets/images/Group258.png
-    - assets/images/Group259.png
-    - assets/images/Group260.png
-    - assets/images/googlelogo.png
-    - assets/images/Cup.png
-    - assets/images/Background.png
-    - assets/images/NotePencil.png
-    - assets/images/privacy.png
-    - assets/images/setting.png
-    - assets/images/Vector 3.png
-    - assets/images/EmptyState.png
-    - assets/images/LogoSplash.png
+    - assets/icon/
+    - assets/images/
 
   uses-material-design: true
 

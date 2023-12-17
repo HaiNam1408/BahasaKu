@@ -1,5 +1,6 @@
 import 'package:bahasaku/src/Theme/TColors.dart';
 import 'package:bahasaku/src/provider/current_test.dart';
+import 'package:bahasaku/src/utils/play_sound.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -33,12 +34,18 @@ class _AnswerButtonState extends State<AnswerButton> {
           ],
         ),
         child: ElevatedButton(
-          onPressed: () {
-            Provider.of<CurrentTest>(context, listen: false)
-                .updateAnswerSelected(widget.choice);
+          onPressed: () async {
             bool isCorrect = widget.answer == widget.choice;
             Provider.of<CurrentTest>(context, listen: false)
+                .updateAnswerSelected(widget.choice);
+            Provider.of<CurrentTest>(context, listen: false)
                 .updateResult(isCorrect);
+            // Play sound
+            if (isCorrect) {
+              PlaySound.correctAnswer();
+            } else {
+              PlaySound.wrongAnswer();
+            }
           },
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.all(8),
