@@ -1,3 +1,5 @@
+import 'package:bahasaku/src/services/firebase_services.dart';
+import 'package:bahasaku/src/views/start_screen/login.dart';
 import 'package:flutter/material.dart';
 
 class ModelLogout extends StatelessWidget {
@@ -37,7 +39,13 @@ class ModelLogout extends StatelessWidget {
                       backgroundColor:
                           MaterialStatePropertyAll(Color(0xffFF2442)),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      await FirebaseServices().googleSignOut();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    },
                     child: const Text(
                       'Logout',
                       style: TextStyle(color: Colors.white, fontSize: 16),

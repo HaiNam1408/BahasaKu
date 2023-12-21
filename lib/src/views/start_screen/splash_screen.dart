@@ -1,7 +1,8 @@
 import 'dart:async';
-
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/views/home_page/home_page.dart';
+import 'package:bahasaku/src/views/start_screen/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,10 +16,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(seconds: 3), () {
+    Timer(const Duration(milliseconds: 2500), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) {
+          if (FirebaseAuth.instance.currentUser == null) {
+            return const LoginPage();
+          } else {
+            return const HomePage();
+          }
+        }),
       );
     });
   }

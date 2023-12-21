@@ -1,4 +1,9 @@
+import 'package:bahasaku/src/controllers/user_controllers.dart';
+import 'package:bahasaku/src/services/firebase_services.dart';
 import 'package:bahasaku/src/utils/constant.dart';
+import 'package:bahasaku/src/views/home_page/home_page.dart';
+import 'package:bahasaku/src/views/start_screen/login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ModelSwitchAccount extends StatelessWidget {
@@ -32,12 +37,10 @@ class ModelSwitchAccount extends StatelessWidget {
                 ],
               ),
               const Text(
-                'Choose Account to Continue',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                'Choose Your Account',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 12),
               Container(
                 width: getWidth(context),
                 decoration: BoxDecoration(
@@ -53,7 +56,7 @@ class ModelSwitchAccount extends StatelessWidget {
                     ],
                     borderRadius: const BorderRadius.all(Radius.circular(13))),
                 child: const Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -109,7 +112,7 @@ class ModelSwitchAccount extends StatelessWidget {
                     ],
                     borderRadius: const BorderRadius.all(Radius.circular(13))),
                 child: const Padding(
-                  padding: EdgeInsets.all(16),
+                  padding: EdgeInsets.all(12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -147,20 +150,26 @@ class ModelSwitchAccount extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 18,
-              ),
-              const Row(
+              const SizedBox(height: 12),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Use another account?',
-                    style: TextStyle(fontSize: 16),
+                  TextButton(
+                    onPressed: () async {
+                      if (FirebaseAuth.instance.currentUser == null) {
+                        await FirebaseServices().signInWithGoogle(context);
+                      } else {
+                        await FirebaseServices().googleSignOut();
+                        await FirebaseServices().signInWithGoogle(context);
+                      }
+                    },
+                    child: const Text(
+                      'Use another account?',
+                      style: TextStyle(color: Color(0xFF1C1C1E), fontSize: 16),
+                    ),
                   ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Icon(
+                  const SizedBox(width: 5),
+                  const Icon(
                     Icons.keyboard_arrow_down,
                     size: 25,
                     color: Colors.grey,

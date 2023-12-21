@@ -1,13 +1,10 @@
 import 'package:bahasaku/src/api/fetchdata.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
 import 'package:bahasaku/src/models/question_model.dart';
-import 'package:bahasaku/src/provider/current_test.dart';
 import 'package:bahasaku/src/views/test_page/widgets/multi_choice_screen.dart';
-import 'package:bahasaku/src/views/test_page/widgets/next_button.dart';
 import 'package:bahasaku/src/views/test_page/widgets/step_progress.dart';
 import 'package:bahasaku/src/views/test_page/widgets/translate_question_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class TestPage extends StatefulWidget {
   const TestPage({super.key});

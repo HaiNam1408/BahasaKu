@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "167921681762",
+    "project_id": "buhasaku",
+    "storage_bucket": "buhasaku.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167921681762:android:fd999425c505cfb6ff583b",
+        "android_client_info": {
+          "package_name": "com.bahasaku.bahasaku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167921681762-5cudsbf45n8g1tnnqnppp23dlando7as.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bahasaku.bahasaku",
+            "certificate_hash": "f71dfd2950c6e21de5f768f3923286aff9ef99a0"
+          }
+        },
+        {
+          "client_id": "167921681762-jtuhv7tbu3clqdd3j6mc49rceq7h6kel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDesfC9-es_rKzG_3TrQ3WR0_qYHN4yCTE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167921681762-jtuhv7tbu3clqdd3j6mc49rceq7h6kel.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "167921681762-tmf9f3q96skdnhtkcolpa6i5l7p2gmvb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bahasaku.bahasaku"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:flutter/material.dart';
 
 class LearnBanner extends StatelessWidget {
@@ -32,8 +32,8 @@ class LearnBanner extends StatelessWidget {
             ],
           ),
           Container(
-            width: 160,
-            height: 160,
+            width: 156,
+            height: 156,
             child: const Image(
               image: AssetImage('assets/images/IlustrationHomePage.png'),
               fit: BoxFit.fill,

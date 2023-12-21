@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/tcolors.dart';
+import 'package:bahasaku/src/utils/tcolors.dart';
 import 'package:bahasaku/src/views/learning_page/learning_page.dart';
 import 'package:flutter/material.dart';
 

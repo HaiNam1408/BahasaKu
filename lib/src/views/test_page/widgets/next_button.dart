@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/models/question_model.dart';
 import 'package:bahasaku/src/provider/current_test.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +61,8 @@ class _NextButtonState extends State<NextButton> {
                     .updateResult(null);
                 widget.onTap();
               },
-              child: Text('Next Question'),
+              child: const Text('Next Question',
+                  style: TextStyle(color: Colors.white)),
             ),
           ),
         ],

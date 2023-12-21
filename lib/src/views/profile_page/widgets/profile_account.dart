@@ -1,6 +1,6 @@
 import 'package:bahasaku/src/common_widgets/card_container.dart';
 import 'package:bahasaku/src/views/profile_page/widgets/model_logout.dart';
-import 'package:bahasaku/src/views/profile_page/widgets/model_switch_account.dart';
+import 'package:bahasaku/src/common_widgets/model_switch_account.dart';
 import 'package:flutter/material.dart';
 
 class ProfileAccount extends StatelessWidget {
