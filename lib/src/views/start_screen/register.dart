@@ -1,3 +1,4 @@
+import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/views/start_screen/age.dart';
 import 'package:bahasaku/src/views/start_screen/login.dart';
 import 'package:flutter/material.dart';
@@ -73,14 +74,9 @@ class _RegisterState extends State<Register> {
                         height: 50,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const LoginPage()));
+                            Navigator.pop(context);
                           },
                           style: ButtonStyle(
-                            backgroundColor:
-                                const MaterialStatePropertyAll(Colors.white),
                             shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
@@ -94,24 +90,14 @@ class _RegisterState extends State<Register> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        width: 130,
-                        height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
+                      AppButton(
+                          title: 'Next',
+                          width: 130,
+                          height: 50,
+                          onTap: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => Age()));
-                          },
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all<
-                                    RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50))),
-                          ),
-                          child: const Text("Next",
-                              style: TextStyle(fontWeight: FontWeight.w500)),
-                        ),
-                      ),
+                          }),
                     ],
                   )
                 ],

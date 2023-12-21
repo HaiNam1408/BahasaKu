@@ -1,4 +1,5 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/services/firebase_services.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:flutter/material.dart';
 
 class LearnNowButton extends StatelessWidget {
@@ -30,12 +31,16 @@ class LearnNowButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const Text('Learn Now', style: TextStyle(fontSize: 16)),
+              const Text('Learn Now',
+                  style: TextStyle(color: Colors.white, fontSize: 16)),
               Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: const Color(0xFF6FC6FF)),
-                child: Icon(Icons.chevron_right),
+                child: Icon(
+                  Icons.chevron_right,
+                  color: Colors.white,
+                ),
               )
             ],
           ),

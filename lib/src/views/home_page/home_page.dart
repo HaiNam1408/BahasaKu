@@ -42,18 +42,12 @@ class _HomePageState extends State<HomePage> {
       body: StreamBuilder(
           stream: Connectivity().onConnectivityChanged,
           builder: (context, AsyncSnapshot<ConnectivityResult> snapshot) {
-            if (snapshot.hasData) {
-              ConnectivityResult? result = snapshot.data;
-              if (result == ConnectivityResult.none) {
-                return const DisconnectScreen();
-              } else {
-                return pages[currentIndex];
-              }
+            ConnectivityResult? result = snapshot.data;
+            if (result == ConnectivityResult.none) {
+              return const DisconnectScreen();
+            } else {
+              return pages[currentIndex];
             }
-            return const Center(
-              child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue)),
-            );
           }),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
@@ -67,6 +61,7 @@ class _HomePageState extends State<HomePage> {
         child: NavigationBar(
           backgroundColor: Colors.white,
           height: 72,
+          indicatorColor: const Color(0x883DB2FF),
           selectedIndex: currentIndex,
           onDestinationSelected: onTapNavigatorBar,
           labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,

@@ -4,13 +4,15 @@ class AppButton extends StatelessWidget {
   final String title;
   final double? width;
   final double? height;
+  final Color? backgroundColor;
   final Function? onTap;
   const AppButton(
       {super.key,
       required this.title,
       this.width = double.maxFinite,
-      this.height,
-      this.onTap});
+      this.height = 60,
+      this.onTap,
+      this.backgroundColor = const Color(0xff0095FF)});
 
   @override
   Widget build(BuildContext context) {
@@ -22,10 +24,9 @@ class AppButton extends StatelessWidget {
           onTap == null ? null : onTap!();
         },
         style: ButtonStyle(
-          backgroundColor: const MaterialStatePropertyAll(Color(0xff0095FF)),
+          backgroundColor: MaterialStatePropertyAll(backgroundColor),
           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
-          padding: MaterialStateProperty.all(const EdgeInsets.all(22)),
         ),
         child: Text(
           title,

@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:flutter/material.dart';
 
 class CheckCircle extends StatelessWidget {

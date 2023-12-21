@@ -1,7 +1,10 @@
 import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
+import 'package:bahasaku/src/provider/current_user.dart';
+import 'package:bahasaku/src/services/firebase_services.dart';
 import 'package:bahasaku/src/views/home_page/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Password extends StatefulWidget {
   const Password({super.key});
@@ -12,6 +15,7 @@ class Password extends StatefulWidget {
 class _PasswordState extends State<Password> {
   bool passwordVisible = true;
   TextEditingController textCtrl = TextEditingController();
+  String? password;
   List statusColor = [
     const Color(0xFFBE222E),
     const Color(0xFFBE442E),
@@ -67,6 +71,7 @@ class _PasswordState extends State<Password> {
 
   @override
   Widget build(BuildContext context) {
+    CurrentUser userProvider = Provider.of<CurrentUser>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -91,6 +96,7 @@ class _PasswordState extends State<Password> {
                 setState(() {
                   passwordStatus = checkPassword(value);
                 });
+                password = value;
               },
               controller: textCtrl,
               obscureText: passwordVisible,
@@ -132,10 +138,18 @@ class _PasswordState extends State<Password> {
             AppButton(
                 title: 'Start',
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
+                  if (password != null && statusIndex > 1) {
+                    userProvider.updatePassword(password!);
+                    userProvider.addNewUser();
+                    String email = userProvider.email!;
+                    String name = userProvider.name!;
+                    FirebaseServices.signUpUserByEmailPassword(
+                        email, password!, name, context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()));
+                  }
                 }),
           ],
         ),

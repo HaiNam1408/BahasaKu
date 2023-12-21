@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/common_widgets/action_button.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
 import 'package:bahasaku/src/utils/constant.dart';
@@ -31,7 +31,7 @@ class _LearningPageState extends State<LearningPage> {
       body: Column(
         children: [
           Container(
-            margin: const EdgeInsets.fromLTRB(0, 64, 0, 12),
+            margin: const EdgeInsets.fromLTRB(0, 56, 0, 12),
             width: 260,
             height: 260,
             child: const Image(

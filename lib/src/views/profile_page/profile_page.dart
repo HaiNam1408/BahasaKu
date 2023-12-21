@@ -1,7 +1,9 @@
 import 'package:bahasaku/src/common_widgets/action_button.dart';
+import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/views/home_page/home_page.dart';
 import 'package:bahasaku/src/views/profile_page/widgets/profile_account.dart';
 import 'package:bahasaku/src/views/profile_page/widgets/profile_dashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -9,6 +11,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userData = FirebaseAuth.instance.currentUser;
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -47,27 +50,28 @@ class ProfilePage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Row(
+                            Row(
                               children: [
                                 CircleAvatar(
-                                  backgroundImage: NetworkImage(
+                                  backgroundImage: NetworkImage(userData
+                                          ?.photoURL ??
                                       'https://www.shareicon.net/data/512x512/2016/05/24/770117_people_512x512.png'),
                                   radius: 50,
                                 ),
-                                SizedBox(
-                                  width: 15,
-                                ),
+                                const SizedBox(width: 15),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      'Nam Pham',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
                                     SizedBox(
-                                      height: 10,
+                                      width: getWidth(context) * 0.45,
+                                      child: Text(
+                                        userData?.displayName ?? 'Guess',
+                                        softWrap: true,
+                                        style: const TextStyle(fontSize: 20),
+                                      ),
                                     ),
-                                    Text(
+                                    const SizedBox(height: 10),
+                                    const Text(
                                       'Newbie',
                                       style: TextStyle(fontSize: 12),
                                     ),
@@ -163,13 +167,9 @@ class ProfilePage extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(
-                          height: 26,
-                        ),
+                        const SizedBox(height: 26),
                         const ProfileDashBoard(),
-                        const SizedBox(
-                          height: 26,
-                        ),
+                        const SizedBox(height: 26),
                         const ProfileAccount()
                       ],
                     ),

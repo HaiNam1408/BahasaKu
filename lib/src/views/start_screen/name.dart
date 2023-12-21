@@ -1,9 +1,18 @@
 import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
+import 'package:bahasaku/src/provider/current_user.dart';
 import 'package:bahasaku/src/views/start_screen/email.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Name extends StatelessWidget {
+class Name extends StatefulWidget {
+  @override
+  State<Name> createState() => _NameState();
+}
+
+class _NameState extends State<Name> {
+  TextEditingController textCtrl = TextEditingController();
+  String? name;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +34,15 @@ class Name extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 36),
-            const TextField(
+            TextField(
+                onChanged: (value) {
+                  name = value;
+                },
+                controller: textCtrl,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, letterSpacing: 0.2),
+                style: const TextStyle(fontSize: 16, letterSpacing: 0.2),
                 keyboardType: TextInputType.text,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(20),
                   enabledBorder: OutlineInputBorder(
                       borderSide:
@@ -43,8 +56,12 @@ class Name extends StatelessWidget {
             AppButton(
                 title: 'Next',
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Email()));
+                  if (name != null) {
+                    Provider.of<CurrentUser>(context, listen: false)
+                        .updateName(name!);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const Email()));
+                  }
                 }),
           ],
         ),

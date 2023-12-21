@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:flutter/material.dart';
 
 class CheckButton extends StatelessWidget {
@@ -19,7 +19,8 @@ class CheckButton extends StatelessWidget {
         onPressed: () {
           onTap();
         },
-        child: Text('Check Answer'),
+        child:
+            const Text('Check Answer', style: TextStyle(color: Colors.white)),
       ),
     );
   }

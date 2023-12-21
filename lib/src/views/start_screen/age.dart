@@ -1,13 +1,22 @@
 import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
+import 'package:bahasaku/src/provider/current_user.dart';
 import 'package:bahasaku/src/views/start_screen/name.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Age extends StatelessWidget {
+class Age extends StatefulWidget {
   const Age({super.key});
 
   @override
+  State<Age> createState() => _AgeState();
+}
+
+class _AgeState extends State<Age> {
+  @override
   Widget build(BuildContext context) {
+    TextEditingController textCtrl = TextEditingController();
+    int? age;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -27,11 +36,15 @@ class Age extends StatelessWidget {
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: 36),
-            const TextField(
+            TextField(
+                onChanged: (value) {
+                  age = int.parse(value);
+                },
+                controller: textCtrl,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, letterSpacing: 0.2),
+                style: const TextStyle(fontSize: 16, letterSpacing: 0.2),
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(20),
                   enabledBorder: OutlineInputBorder(
                       borderSide:
@@ -45,8 +58,12 @@ class Age extends StatelessWidget {
             AppButton(
                 title: 'Next',
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Name()));
+                  if (age != null) {
+                    Provider.of<CurrentUser>(context, listen: false)
+                        .updateAge(age!);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Name()));
+                  }
                 }),
             const SizedBox(height: 36),
             Row(

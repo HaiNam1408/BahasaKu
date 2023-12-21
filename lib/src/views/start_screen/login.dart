@@ -1,6 +1,7 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/services/firebase_services.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
+import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/common_widgets/model_switch_account.dart';
-import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/views/start_screen/register.dart';
 import 'package:flutter/material.dart';
 import 'package:validators/validators.dart';
@@ -15,6 +16,10 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool isEmailCorrect = false;
   bool passwordVisible = true;
+  TextEditingController emailCtrl = TextEditingController();
+  TextEditingController passwordCtrl = TextEditingController();
+  String? email;
+  String? password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,7 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                           TextFormField(
                             onChanged: (val) {
                               isEmailCorrect = isEmail(val);
+                              email = val;
                             },
+                            controller: emailCtrl,
                             decoration: const InputDecoration(
                               hintText: 'Email....',
                               contentPadding: EdgeInsets.all(20),
@@ -86,6 +93,10 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 10),
                           TextFormField(
+                            onChanged: (val) {
+                              password = val;
+                            },
+                            controller: passwordCtrl,
                             obscureText: passwordVisible,
                             decoration: InputDecoration(
                               suffixIcon: IconButton(
@@ -99,15 +110,15 @@ class _LoginPageState extends State<LoginPage> {
                                     : Icons.visibility),
                               ),
                               hintText: 'Password....',
-                              contentPadding: EdgeInsets.all(20),
-                              hintStyle: TextStyle(fontSize: 15),
-                              enabledBorder: OutlineInputBorder(
+                              contentPadding: const EdgeInsets.all(20),
+                              hintStyle: const TextStyle(fontSize: 15),
+                              enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       width: 1,
                                       color: TColors.primaryBoldColor),
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(50))),
-                              focusedBorder: OutlineInputBorder(
+                              focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(
                                       width: 1,
                                       color: TColors.primaryBoldColor),
@@ -116,21 +127,15 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          SizedBox(
-                            width: getWidth(context),
-                            height: 60,
-                            child: ElevatedButton(
-                                style: ButtonStyle(
-                                    shape: MaterialStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(50)))),
-                                onPressed: () {},
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(fontSize: 16),
-                                )),
-                          ),
+                          AppButton(
+                              title: 'Login',
+                              height: 60,
+                              onTap: () {
+                                if (email != null && password != null) {
+                                  FirebaseServices.signInUserByEmailPassword(
+                                      email!, password!, context);
+                                }
+                              }),
                         ],
                       ),
                       const SizedBox(height: 20),
@@ -163,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                               height: 16)
                         ],
                       ),
-                      SizedBox(height: 36),
+                      const SizedBox(height: 36),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -179,7 +184,10 @@ class _LoginPageState extends State<LoginPage> {
                                         builder: (context) =>
                                             const Register()));
                               },
-                              child: const Text('Register'))
+                              child: const Text(
+                                'Register',
+                                style: TextStyle(color: TColors.primaryColor),
+                              ))
                         ],
                       ),
                     ],

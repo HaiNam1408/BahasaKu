@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/views/learn_page/widgets/cell_course.dart';
 import 'package:bahasaku/src/views/learn_page/widgets/learn_banner.dart';

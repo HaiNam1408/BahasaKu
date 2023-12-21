@@ -28,6 +28,10 @@ dependencies:
   flutter_tts: ^3.8.5
   just_audio: ^0.9.36
   validators: ^3.0.0
+  cloud_firestore: ^4.13.6
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
+  google_sign_in: ^6.2.1
 
 
 dev_dependencies:

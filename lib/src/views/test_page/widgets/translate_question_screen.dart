@@ -1,4 +1,4 @@
-import 'package:bahasaku/src/Theme/TColors.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/models/question_model.dart';
 import 'package:bahasaku/src/provider/current_test.dart';
 import 'package:bahasaku/src/utils/constant.dart';
@@ -70,7 +70,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
                 children: [
                   SizedBox(
                     height: 50,
-                    width: 54,
+                    width: 60,
                     child: ElevatedButton(
                         onPressed: () {
                           speak(widget.question.sentence ?? '');
@@ -81,7 +81,8 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10)))),
-                        child: const Icon(CupertinoIcons.speaker_2)),
+                        child: const Icon(CupertinoIcons.speaker_2,
+                            color: Colors.white)),
                   ),
                   const SizedBox(width: 12),
                   Flexible(
@@ -92,7 +93,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
                 ],
               ),
               const SizedBox(height: 32),
-              Container(
+              SizedBox(
                 height: 220,
                 child: IgnorePointer(
                     ignoring: Provider.of<CurrentTest>(context).result == null
@@ -112,7 +113,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
                           hintText: 'Type your answer',
                           enabledBorder: OutlineInputBorder(
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(18)),
+                                  const BorderRadius.all(Radius.circular(18)),
                               borderSide: BorderSide(
                                   width: 1,
                                   color: isCorrect == null
@@ -128,7 +129,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
                         ),
                       ),
                       isCorrect == null
-                          ? SizedBox()
+                          ? const SizedBox()
                           : Positioned(
                               bottom: 14,
                               right: 14,

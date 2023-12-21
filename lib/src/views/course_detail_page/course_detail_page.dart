@@ -1,5 +1,6 @@
 import 'package:bahasaku/src/common_widgets/circle_indicator.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
+import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/utils/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -194,8 +195,10 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                         SizedBox(
                           width: getWidth(context),
                           child: ElevatedButton(
-                              style: const ButtonStyle(
-                                  shape: MaterialStatePropertyAll(
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      TColors.primaryColor),
+                                  shape: const MaterialStatePropertyAll(
                                       RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(50))))),
