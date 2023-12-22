@@ -4,14 +4,21 @@ import 'package:flutter/material.dart';
 class SearchCard extends StatelessWidget {
   final String title;
   final String image;
-  const SearchCard({super.key, required this.title, required this.image});
+  final String courseId;
+  const SearchCard(
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.courseId});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CourseDetailPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CourseDetailPage(courseId: courseId)));
       },
       child: SizedBox(
         width: 100,
@@ -30,9 +37,13 @@ class SearchCard extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            Text(
-              title,
-              style: const TextStyle(fontWeight: FontWeight.w500),
+            Expanded(
+              child: Text(
+                title,
+                softWrap: true,
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontWeight: FontWeight.w500),
+              ),
             )
           ],
         ),

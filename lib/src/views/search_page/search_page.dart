@@ -1,3 +1,5 @@
+import 'package:bahasaku/src/api/fetchdata.dart';
+import 'package:bahasaku/src/models/course_model.dart';
 import 'package:bahasaku/src/views/search_page/widgets/search_card.dart';
 import 'package:bahasaku/src/views/search_page/widgets/search_cell.dart';
 import 'package:bahasaku/src/views/search_page/widgets/search_hashtag.dart';
@@ -11,7 +13,21 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  List<String> image = [];
+  List<Course> listCourse = [];
+  List<Course> rawData = [];
+  final _searchController = TextEditingController();
+  var searchValue = "";
+  @override
+  void initState() {
+    DataRequest.fetchCourses().then((data) => {
+          setState(() {
+            data.sort((a, b) => a.title!.compareTo(b.title!));
+            listCourse = data;
+            rawData = data;
+          })
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,16 +75,26 @@ class _SearchPageState extends State<SearchPage> {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
               top: 136,
               right: 20,
               left: 20,
               child: Material(
-                borderRadius: BorderRadius.all(Radius.circular(12)),
+                borderRadius: const BorderRadius.all(Radius.circular(12)),
                 elevation: 10,
                 shadowColor: Colors.black,
                 child: TextField(
-                  decoration: InputDecoration(
+                  onChanged: (value) {
+                    setState(() {
+                      searchValue = value;
+                      listCourse = rawData
+                          .where((e) =>
+                              e.title!.toLowerCase().contains(searchValue))
+                          .toList();
+                    });
+                  },
+                  controller: _searchController,
+                  decoration: const InputDecoration(
                       suffixIcon: Padding(
                         padding: EdgeInsets.only(right: 20),
                         child: Icon(
@@ -113,13 +139,13 @@ class _SearchPageState extends State<SearchPage> {
                                 scrollDirection: Axis.horizontal,
                                 children: const [
                                   SizedBox(width: 10),
-                                  SearchHashTag(hashtag: 'English'),
+                                  SearchHashTag(hashtag: 'TOEIC'),
                                   SizedBox(width: 10),
-                                  SearchHashTag(hashtag: 'Japanese'),
+                                  SearchHashTag(hashtag: 'IELTS'),
                                   SizedBox(width: 10),
-                                  SearchHashTag(hashtag: 'Korean'),
+                                  SearchHashTag(hashtag: 'Vocabulary'),
                                   SizedBox(width: 10),
-                                  SearchHashTag(hashtag: 'Chinese'),
+                                  SearchHashTag(hashtag: 'Grammar'),
                                 ],
                               ),
                             ),
@@ -128,82 +154,60 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                       const SizedBox(height: 30),
                       SizedBox(
-                        height: 140,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: const [
-                            SearchCard(
-                                title: 'English',
-                                image:
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/1200px-Flag_of_the_United_Kingdom_%281-2%29.svg.png'),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            SearchCard(
-                                title: 'Japanese',
-                                image:
-                                    'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/2560px-Flag_of_Japan.svg.png'),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            SearchCard(
-                                title: 'Korean',
-                                image:
-                                    'https://upload.wikimedia.org/wikipedia/commons/0/0f/Flag_of_South_Korea.png'),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            SearchCard(
-                                title: 'Chinese',
-                                image:
-                                    'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png'),
-                            SizedBox(
-                              width: 20,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 40,
-                      ),
+                          height: 160,
+                          child: (listCourse.isNotEmpty)
+                              ? ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  shrinkWrap: true,
+                                  itemCount: listCourse.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                        margin:
+                                            const EdgeInsets.only(right: 20),
+                                        child: SearchCard(
+                                            title: listCourse[index].title!,
+                                            image: listCourse[index].image!,
+                                            courseId: listCourse[index].id!));
+                                  })
+                              : const Center(
+                                  child: Text('Loading...'),
+                                )),
+                      const SizedBox(height: 40),
                       Padding(
                         padding: const EdgeInsets.only(right: 20),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          child: const Column(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Previous Language Courses',
+                              const Text(
+                                'List Of Language Courses',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              SearchCell(
-                                  title: 'English',
-                                  subtitle: 'Introduction',
-                                  image:
-                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Flag_of_the_United_Kingdom_%281-2%29.svg/1200px-Flag_of_the_United_Kingdom_%281-2%29.svg.png'),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              SearchCell(
-                                  title: 'Japanese',
-                                  subtitle: 'Grammar',
-                                  image:
-                                      'https://upload.wikimedia.org/wikipedia/en/thumb/9/9e/Flag_of_Japan.svg/2560px-Flag_of_Japan.svg.png'),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              SearchCell(
-                                  title: 'Chinese',
-                                  subtitle: 'Pronunciation',
-                                  image:
-                                      'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/2560px-Flag_of_the_People%27s_Republic_of_China.svg.png'),
-                              SizedBox(
-                                height: 15,
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: Column(
+                                    children: (listCourse.isNotEmpty)
+                                        ? listCourse
+                                            .map((course) => Container(
+                                                  margin: const EdgeInsets.only(
+                                                      bottom: 15),
+                                                  child: SearchCell(
+                                                    title: course.title!,
+                                                    subtitle: course.subtitle!,
+                                                    image: course.image!,
+                                                    courseId: course.id!,
+                                                  ),
+                                                ))
+                                            .toList()
+                                        : [
+                                            const Center(
+                                              child: Text('Loading...'),
+                                            )
+                                          ]),
                               ),
                             ],
                           ),

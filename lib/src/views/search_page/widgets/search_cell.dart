@@ -5,18 +5,22 @@ class SearchCell extends StatelessWidget {
   final String title;
   final String subtitle;
   final String image;
+  final String courseId;
   const SearchCell(
       {super.key,
       required this.title,
       required this.subtitle,
-      required this.image});
+      required this.image,
+      required this.courseId});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CourseDetailPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CourseDetailPage(courseId: courseId)));
       },
       child: Container(
         decoration: BoxDecoration(
@@ -43,13 +47,14 @@ class SearchCell extends StatelessWidget {
                       Text(
                         title,
                         style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
+                            fontSize: 16,
+                            letterSpacing: -0.5,
+                            fontWeight: FontWeight.w500),
                       ),
-                      const SizedBox(
-                        height: 5,
-                      ),
+                      const SizedBox(height: 5),
                       Text(
                         subtitle,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ],
