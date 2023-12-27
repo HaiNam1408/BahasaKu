@@ -1,6 +1,6 @@
 import 'package:bahasaku/firebase_options.dart';
-import 'package:bahasaku/src/provider/current_test.dart';
-import 'package:bahasaku/src/provider/current_user.dart';
+import 'package:bahasaku/src/provider/test_provider.dart';
+import 'package:bahasaku/src/provider/user_provider.dart';
 import 'package:bahasaku/src/views/start_screen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => CurrentTest()),
-        ChangeNotifierProvider(create: (context) => CurrentUser()),
+        ChangeNotifierProvider(create: (context) => TestProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

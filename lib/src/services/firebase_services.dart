@@ -1,10 +1,12 @@
 import 'package:bahasaku/src/controllers/user_controllers.dart';
+import 'package:bahasaku/src/provider/user_provider.dart';
 import 'package:bahasaku/src/views/home_page/home_page.dart';
 import 'package:bahasaku/src/views/start_screen/login.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 
 class FirebaseServices {
   final _auth = FirebaseAuth.instance;
@@ -21,7 +23,18 @@ class FirebaseServices {
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken);
         await _auth.signInWithCredential(authCredential);
-        await UserController().createUser();
+        Object userData = {
+          'uid': FirebaseAuth.instance.currentUser?.uid,
+          'name': FirebaseAuth.instance.currentUser!.displayName,
+          'avatar': FirebaseAuth.instance.currentUser!.photoURL,
+          'email': FirebaseAuth.instance.currentUser!.email,
+          'courses': [
+            {"id": "course001", "progress": 0},
+            {"id": "course002", "progress": 0},
+            {"id": "course003", "progress": 0}
+          ]
+        };
+        await UserController().createUser(userData);
         Navigator.push(context, MaterialPageRoute(builder: (_) {
           if (FirebaseAuth.instance.currentUser == null) {
             return const LoginPage();
@@ -41,10 +54,11 @@ class FirebaseServices {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
-
+      Object userData =
+          Provider.of<UserProvider>(context, listen: false).getCurrentUser();
+      await UserController().createUser(userData);
       await FirebaseAuth.instance.currentUser!.updateDisplayName(name);
       await FirebaseAuth.instance.currentUser!.updateEmail(email);
-      // await FirestoreServices.saveUser(name, email, userCredential.user!.uid);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Registration Successful')));
     } on FirebaseAuthException catch (e) {

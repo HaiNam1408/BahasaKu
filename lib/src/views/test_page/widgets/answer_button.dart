@@ -1,5 +1,5 @@
 import 'package:bahasaku/src/utils/TColors.dart';
-import 'package:bahasaku/src/provider/current_test.dart';
+import 'package:bahasaku/src/provider/test_provider.dart';
 import 'package:bahasaku/src/utils/play_sound.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,9 +36,9 @@ class _AnswerButtonState extends State<AnswerButton> {
         child: ElevatedButton(
           onPressed: () async {
             bool isCorrect = widget.answer == widget.choice;
-            Provider.of<CurrentTest>(context, listen: false)
+            Provider.of<TestProvider>(context, listen: false)
                 .updateAnswerSelected(widget.choice);
-            Provider.of<CurrentTest>(context, listen: false)
+            Provider.of<TestProvider>(context, listen: false)
                 .updateResult(isCorrect);
             // Play sound
             if (isCorrect) {

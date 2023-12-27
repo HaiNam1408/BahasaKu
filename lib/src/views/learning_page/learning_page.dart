@@ -7,7 +7,8 @@ import 'package:bahasaku/src/views/learning_page/widgets/level_card.dart';
 import 'package:flutter/material.dart';
 
 class LearningPage extends StatefulWidget {
-  const LearningPage({super.key});
+  final String courseId;
+  const LearningPage({super.key, required this.courseId});
 
   @override
   State<LearningPage> createState() => _LearningPageState();

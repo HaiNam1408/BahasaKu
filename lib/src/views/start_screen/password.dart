@@ -1,6 +1,7 @@
 import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
-import 'package:bahasaku/src/provider/current_user.dart';
+import 'package:bahasaku/src/controllers/user_controllers.dart';
+import 'package:bahasaku/src/provider/user_provider.dart';
 import 'package:bahasaku/src/services/firebase_services.dart';
 import 'package:bahasaku/src/views/home_page/home_page.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +72,8 @@ class _PasswordState extends State<Password> {
 
   @override
   Widget build(BuildContext context) {
-    CurrentUser userProvider = Provider.of<CurrentUser>(context, listen: false);
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
@@ -140,7 +142,6 @@ class _PasswordState extends State<Password> {
                 onTap: () {
                   if (password != null && statusIndex > 1) {
                     userProvider.updatePassword(password!);
-                    userProvider.addNewUser();
                     String email = userProvider.email!;
                     String name = userProvider.name!;
                     FirebaseServices.signUpUserByEmailPassword(

@@ -1,6 +1,6 @@
 import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/models/question_model.dart';
-import 'package:bahasaku/src/provider/current_test.dart';
+import 'package:bahasaku/src/provider/test_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +16,7 @@ class NextButton extends StatefulWidget {
 class _NextButtonState extends State<NextButton> {
   @override
   Widget build(BuildContext context) {
-    bool isCorrect = Provider.of<CurrentTest>(context).result!;
+    bool isCorrect = Provider.of<TestProvider>(context).result!;
     Color statusColor = isCorrect ? TColors.successColor : TColors.dangerColor;
     return Container(
       decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class _NextButtonState extends State<NextButton> {
                   padding: MaterialStateProperty.all(
                       EdgeInsets.symmetric(vertical: 16))),
               onPressed: () {
-                Provider.of<CurrentTest>(context, listen: false)
+                Provider.of<TestProvider>(context, listen: false)
                     .updateResult(null);
                 widget.onTap();
               },

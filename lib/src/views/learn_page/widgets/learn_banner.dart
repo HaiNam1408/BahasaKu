@@ -1,4 +1,5 @@
 import 'package:bahasaku/src/utils/TColors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LearnBanner extends StatelessWidget {
@@ -6,6 +7,8 @@ class LearnBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? userName =
+        FirebaseAuth.instance.currentUser?.displayName?.split(' ')[0];
     return Container(
       padding: const EdgeInsets.fromLTRB(32, 60, 0, 0),
       decoration: const BoxDecoration(color: TColors.primaryColor),
@@ -13,19 +16,19 @@ class LearnBanner extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 40),
+              const SizedBox(height: 40),
               Text(
-                'Hi, Nam!',
-                style: TextStyle(
+                'Hi, $userName!',
+                style: const TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                     fontWeight: FontWeight.w600),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'What local language\nwould you like to learn?',
                 style: TextStyle(color: Colors.white, fontSize: 13),
               ),

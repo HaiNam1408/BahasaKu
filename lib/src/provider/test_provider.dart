@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class CurrentTest with ChangeNotifier {
+class TestProvider with ChangeNotifier {
   String? _selectedAnswer;
   bool? _result;
   int _index = 0;

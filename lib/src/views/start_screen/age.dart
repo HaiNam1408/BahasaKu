@@ -1,6 +1,6 @@
 import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
-import 'package:bahasaku/src/provider/current_user.dart';
+import 'package:bahasaku/src/provider/user_provider.dart';
 import 'package:bahasaku/src/views/start_screen/name.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +59,7 @@ class _AgeState extends State<Age> {
                 title: 'Next',
                 onTap: () {
                   if (age != null) {
-                    Provider.of<CurrentUser>(context, listen: false)
+                    Provider.of<UserProvider>(context, listen: false)
                         .updateAge(age!);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => Name()));
