@@ -1,6 +1,6 @@
 import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/models/question_model.dart';
-import 'package:bahasaku/src/provider/current_test.dart';
+import 'package:bahasaku/src/provider/test_provider.dart';
 import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/utils/play_sound.dart';
 import 'package:bahasaku/src/views/test_page/widgets/check_button.dart';
@@ -36,7 +36,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
       String answer = widget.question.answer!;
       bool isCorrect =
           textValue.trim().toLowerCase() == answer.trim().toLowerCase();
-      Provider.of<CurrentTest>(context, listen: false).updateResult(isCorrect);
+      Provider.of<TestProvider>(context, listen: false).updateResult(isCorrect);
       // Play sound
       if (isCorrect) {
         PlaySound.correctAnswer();
@@ -54,7 +54,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
 
   @override
   Widget build(BuildContext context) {
-    isCorrect = Provider.of<CurrentTest>(context).result;
+    isCorrect = Provider.of<TestProvider>(context).result;
     return Stack(
       children: [
         SizedBox(
@@ -96,7 +96,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
               SizedBox(
                 height: 220,
                 child: IgnorePointer(
-                    ignoring: Provider.of<CurrentTest>(context).result == null
+                    ignoring: Provider.of<TestProvider>(context).result == null
                         ? false
                         : true,
                     child: Stack(children: [
@@ -143,7 +143,7 @@ class _TranslateQuestionState extends State<TranslateQuestion> {
             bottom: 4,
             left: 0,
             right: 0,
-            child: Provider.of<CurrentTest>(context).result == null
+            child: Provider.of<TestProvider>(context).result == null
                 ? CheckButton(onTap: checkAnswer)
                 : NextButton(
                     question: widget.question,

@@ -1,5 +1,5 @@
 import 'package:bahasaku/src/models/question_model.dart';
-import 'package:bahasaku/src/provider/current_test.dart';
+import 'package:bahasaku/src/provider/test_provider.dart';
 import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/views/test_page/widgets/answer_button.dart';
 import 'package:bahasaku/src/views/test_page/widgets/next_button.dart';
@@ -48,7 +48,7 @@ class _MultiChoiceScreenState extends State<MultiChoiceScreen> {
               Container(
                 height: 180,
                 child: IgnorePointer(
-                  ignoring: Provider.of<CurrentTest>(context).result == null
+                  ignoring: Provider.of<TestProvider>(context).result == null
                       ? false
                       : true,
                   child: CustomScrollView(
@@ -67,7 +67,7 @@ class _MultiChoiceScreenState extends State<MultiChoiceScreen> {
                                 choice: widget.question.choices![index],
                                 answer: widget.question.answer!,
                                 isSelected: widget.question.choices![index] ==
-                                    Provider.of<CurrentTest>(context)
+                                    Provider.of<TestProvider>(context)
                                         .selectedAnswer);
                           },
                           childCount: 4,
@@ -84,7 +84,7 @@ class _MultiChoiceScreenState extends State<MultiChoiceScreen> {
             bottom: 4,
             left: 0,
             right: 0,
-            child: Provider.of<CurrentTest>(context).result == null
+            child: Provider.of<TestProvider>(context).result == null
                 ? const SizedBox()
                 : NextButton(question: widget.question, onTap: widget.onTap))
       ],

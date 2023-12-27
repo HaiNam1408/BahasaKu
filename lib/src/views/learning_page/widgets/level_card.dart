@@ -25,19 +25,54 @@ class _LevelCardState extends State<LevelCard> {
   final Map levels = {
     1: {
       'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
-      'label': 'Level 1',
+      'label': 'Lesson 1',
       'color': TColors.successColor
     },
     2: {
       'icon': SvgPicture.asset('assets/icon/BookBookmark.svg'),
-      'label': 'Level 2',
+      'label': 'Lesson 2',
       'color': TColors.warningColor
     },
     3: {
       'icon': SvgPicture.asset('assets/icon/Fire.svg'),
-      'label': 'Level 3',
+      'label': 'Lesson 3',
       'color': TColors.dangerColor
     },
+    4: {
+      'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
+      'label': 'Lesson 4',
+      'color': TColors.successColor
+    },
+    5: {
+      'icon': SvgPicture.asset('assets/icon/BookBookmark.svg'),
+      'label': 'Lesson 5',
+      'color': TColors.warningColor
+    },
+    6: {
+      'icon': SvgPicture.asset('assets/icon/Fire.svg'),
+      'label': 'Lesson 6',
+      'color': TColors.dangerColor
+    },
+    7: {
+      'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
+      'label': 'Lesson 7',
+      'color': TColors.successColor
+    },
+    8: {
+      'icon': SvgPicture.asset('assets/icon/BookBookmark.svg'),
+      'label': 'Lesson 8',
+      'color': TColors.warningColor
+    },
+    9: {
+      'icon': SvgPicture.asset('assets/icon/Fire.svg'),
+      'label': 'Lesson 9',
+      'color': TColors.dangerColor
+    },
+    10: {
+      'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
+      'label': 'Lesson 10',
+      'color': TColors.successColor
+    }
   };
 
   @override
@@ -61,7 +96,7 @@ class _LevelCardState extends State<LevelCard> {
         child: Row(
           children: [
             Container(
-              width: 50,
+              width: 60,
               height: 56,
               decoration: ShapeDecoration(
                 color: levels[widget.level]['color'],
@@ -83,7 +118,8 @@ class _LevelCardState extends State<LevelCard> {
                   levels[widget.level]['icon'],
                   Text(
                     levels[widget.level]['label'],
-                    style: TextStyle(color: Colors.white, fontSize: 9),
+                    style: TextStyle(
+                        color: Colors.white, fontSize: 9, letterSpacing: -0.5),
                   )
                 ],
               ),

@@ -1,9 +1,12 @@
+import 'package:bahasaku/src/provider/user_provider.dart';
 import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/utils/constant.dart';
 import 'package:bahasaku/src/views/learn_page/widgets/cell_course.dart';
 import 'package:bahasaku/src/views/learn_page/widgets/learn_banner.dart';
 import 'package:bahasaku/src/views/learn_page/widgets/small_earning.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LearnPage extends StatefulWidget {
   const LearnPage({super.key});
@@ -13,6 +16,38 @@ class LearnPage extends StatefulWidget {
 }
 
 class _HomeState extends State<LearnPage> {
+  List<Widget> CellCourseList() {
+    List courseList = Provider.of<UserProvider>(context, listen: false).courses;
+    List<Widget> result = courseList.map((course) {
+      return FutureBuilder<DocumentSnapshot>(
+        future: FirebaseFirestore.instance
+            .collection('courses')
+            .where('id', isEqualTo: course['id'])
+            .get()
+            .then((snapshot) => snapshot.docs.first),
+        builder:
+            (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return const Text('Something be wrong!');
+          } else {
+            return Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              child: CellCourse(
+                title: snapshot.data?['title'],
+                image: snapshot.data?['image'],
+                progress: course['progress'].toDouble(),
+                courseId: course['id'],
+              ),
+            );
+          }
+        },
+      );
+    }).toList();
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -39,8 +74,8 @@ class _HomeState extends State<LearnPage> {
                   Expanded(
                     flex: 1,
                     child: ListView(
-                      children: const [
-                        Text(
+                      children: [
+                        const Text(
                           'Language Being Learned',
                           textAlign: TextAlign.center,
                           style: TextStyle(
@@ -48,8 +83,8 @@ class _HomeState extends State<LearnPage> {
                               fontWeight: FontWeight.w500,
                               color: TColors.textColor),
                         ),
-                        SizedBox(height: 30),
-                        Row(
+                        const SizedBox(height: 30),
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SmallEarningCard(
@@ -62,26 +97,8 @@ class _HomeState extends State<LearnPage> {
                                 subtitle: '5K participants'),
                           ],
                         ),
-                        SizedBox(height: 30),
-                        Column(
-                          children: [
-                            CellCourse(
-                                title: 'Sundanese',
-                                image: 'assets/images/image1.png',
-                                progress: 80),
-                            SizedBox(height: 12),
-                            CellCourse(
-                                title: 'Balinese',
-                                image: 'assets/images/image2.png',
-                                progress: 50),
-                            SizedBox(height: 12),
-                            CellCourse(
-                                title: 'Aceh',
-                                image: 'assets/images/image3.png',
-                                progress: 30),
-                            SizedBox(height: 12)
-                          ],
-                        )
+                        const SizedBox(height: 30),
+                        Column(children: CellCourseList())
                       ],
                     ),
                   )

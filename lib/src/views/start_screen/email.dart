@@ -1,6 +1,6 @@
 import 'package:bahasaku/src/common_widgets/app_button.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
-import 'package:bahasaku/src/provider/current_user.dart';
+import 'package:bahasaku/src/provider/user_provider.dart';
 import 'package:bahasaku/src/views/start_screen/password.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +59,7 @@ class _EmailState extends State<Email> {
                 title: 'Next',
                 onTap: () {
                   if (email != null) {
-                    Provider.of<CurrentUser>(context, listen: false)
+                    Provider.of<UserProvider>(context, listen: false)
                         .updateEmail(email!);
                     Navigator.push(
                         context,

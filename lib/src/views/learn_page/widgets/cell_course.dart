@@ -6,8 +6,13 @@ class CellCourse extends StatefulWidget {
   final String title;
   final String image;
   final double progress;
+  final String courseId;
   const CellCourse(
-      {super.key, required this.title, required this.image, this.progress = 0});
+      {super.key,
+      required this.title,
+      required this.image,
+      this.progress = 0,
+      required this.courseId});
 
   @override
   State<CellCourse> createState() => _CellCourseState();
@@ -18,8 +23,10 @@ class _CellCourseState extends State<CellCourse> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const LearningPage()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => LearningPage(courseId: widget.courseId)));
       },
       child: Container(
         height: 84,
@@ -38,7 +45,7 @@ class _CellCourseState extends State<CellCourse> {
               height: 61,
               decoration: ShapeDecoration(
                 image: DecorationImage(
-                  image: AssetImage(widget.image),
+                  image: NetworkImage(widget.image),
                   fit: BoxFit.cover,
                 ),
                 shape: RoundedRectangleBorder(
@@ -55,8 +62,11 @@ class _CellCourseState extends State<CellCourse> {
                 children: [
                   Text(
                     widget.title,
-                    style:
-                        const TextStyle(fontSize: 18, color: TColors.textColor),
+                    style: const TextStyle(
+                        fontSize: 16,
+                        color: TColors.textColor,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: -0.2),
                   ),
                   SizedBox(height: 16),
                   Container(
