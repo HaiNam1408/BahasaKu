@@ -46,7 +46,7 @@ class _MultiChoiceScreenState extends State<MultiChoiceScreen> {
                 ),
               ),
               Container(
-                height: 180,
+                height: 200,
                 child: IgnorePointer(
                   ignoring: Provider.of<TestProvider>(context).result == null
                       ? false
@@ -57,8 +57,8 @@ class _MultiChoiceScreenState extends State<MultiChoiceScreen> {
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          mainAxisSpacing: 30,
-                          crossAxisSpacing: 53,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 20,
                           childAspectRatio: 2,
                         ),
                         delegate: SliverChildBuilderDelegate(

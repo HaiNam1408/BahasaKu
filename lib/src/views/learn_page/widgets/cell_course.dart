@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 class CellCourse extends StatefulWidget {
   final String title;
   final String image;
-  final double progress;
+  final List progress;
   final String courseId;
   const CellCourse(
       {super.key,
       required this.title,
       required this.image,
-      this.progress = 0,
+      required this.progress,
       required this.courseId});
 
   @override
@@ -19,6 +19,14 @@ class CellCourse extends StatefulWidget {
 }
 
 class _CellCourseState extends State<CellCourse> {
+  double getProgressPercent() {
+    int num = 0;
+    for (var e in widget.progress) {
+      if (e != 0) num++;
+    }
+    return num / widget.progress.length * 100;
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -26,7 +34,8 @@ class _CellCourseState extends State<CellCourse> {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => LearningPage(courseId: widget.courseId)));
+                builder: (context) => LearningPage(
+                    courseId: widget.courseId, title: widget.title)));
       },
       child: Container(
         height: 84,
@@ -75,7 +84,7 @@ class _CellCourseState extends State<CellCourse> {
                       borderRadius: BorderRadius.all(Radius.circular(16)),
                       backgroundColor: Color(0xFFFFF5EE),
                       valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
-                      value: widget.progress / 100,
+                      value: getProgressPercent() / 100,
                     ),
                   )
                 ],
@@ -86,7 +95,7 @@ class _CellCourseState extends State<CellCourse> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(),
-                Text('${widget.progress.toInt()}%',
+                Text('${getProgressPercent().toInt()}%',
                     style: const TextStyle(fontSize: 12))
               ],
             )

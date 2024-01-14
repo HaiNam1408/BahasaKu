@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -8,9 +7,18 @@ class UserProvider with ChangeNotifier {
   String? _email;
   String? _password;
   List _courses = [
-    {"id": "course001", "progress": 0},
-    {"id": "course002", "progress": 0},
-    {"id": "course003", "progress": 0}
+    {
+      "id": "course001",
+      "progress": [4, 1, 0, 0, 9, 0, 4, 0, 0, 0]
+    },
+    {
+      "id": "course002",
+      "progress": [3, 5, 0, 0, 3, 0, 2, 0, 0, 0]
+    },
+    {
+      "id": "course003",
+      "progress": [6, 0, 6, 0, 0, 4, 0, 0, 0, 0]
+    }
   ];
 
   String? get name => _name;

@@ -3,13 +3,13 @@ import 'package:bahasaku/src/views/test_page/test_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class LevelCard extends StatefulWidget {
+class LessonCard extends StatefulWidget {
   final String title;
   final String estimateTime;
-  final int level;
+  final String level;
   final int numberOfLesson;
   final int numberOfFinished;
-  const LevelCard(
+  const LessonCard(
       {super.key,
       required this.title,
       required this.estimateTime,
@@ -18,57 +18,57 @@ class LevelCard extends StatefulWidget {
       required this.numberOfFinished});
 
   @override
-  State<LevelCard> createState() => _LevelCardState();
+  State<LessonCard> createState() => _LessonCardState();
 }
 
-class _LevelCardState extends State<LevelCard> {
+class _LessonCardState extends State<LessonCard> {
   final Map levels = {
-    1: {
+    '1': {
       'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
       'label': 'Lesson 1',
       'color': TColors.successColor
     },
-    2: {
+    '2': {
       'icon': SvgPicture.asset('assets/icon/BookBookmark.svg'),
       'label': 'Lesson 2',
       'color': TColors.warningColor
     },
-    3: {
+    '3': {
       'icon': SvgPicture.asset('assets/icon/Fire.svg'),
       'label': 'Lesson 3',
       'color': TColors.dangerColor
     },
-    4: {
+    '4': {
       'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
       'label': 'Lesson 4',
       'color': TColors.successColor
     },
-    5: {
+    '5': {
       'icon': SvgPicture.asset('assets/icon/BookBookmark.svg'),
       'label': 'Lesson 5',
       'color': TColors.warningColor
     },
-    6: {
+    '6': {
       'icon': SvgPicture.asset('assets/icon/Fire.svg'),
       'label': 'Lesson 6',
       'color': TColors.dangerColor
     },
-    7: {
+    '7': {
       'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
       'label': 'Lesson 7',
       'color': TColors.successColor
     },
-    8: {
+    '8': {
       'icon': SvgPicture.asset('assets/icon/BookBookmark.svg'),
       'label': 'Lesson 8',
       'color': TColors.warningColor
     },
-    9: {
+    '9': {
       'icon': SvgPicture.asset('assets/icon/Fire.svg'),
       'label': 'Lesson 9',
       'color': TColors.dangerColor
     },
-    10: {
+    '10': {
       'icon': SvgPicture.asset('assets/icon/Handshake.svg'),
       'label': 'Lesson 10',
       'color': TColors.successColor
@@ -128,15 +128,26 @@ class _LevelCardState extends State<LevelCard> {
             Expanded(
               flex: 1,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     widget.title,
-                    style:
-                        const TextStyle(fontSize: 18, color: TColors.textColor),
+                    style: const TextStyle(
+                        fontSize: 18,
+                        height: 1,
+                        color: TColors.textColor,
+                        letterSpacing: -0.2,
+                        overflow: TextOverflow.ellipsis),
                   ),
-                  SizedBox(height: 16),
+                  Text(
+                    widget.estimateTime,
+                    style: const TextStyle(
+                        fontSize: 10,
+                        color: TColors.textColor,
+                        letterSpacing: -0.2,
+                        overflow: TextOverflow.ellipsis),
+                  ),
                   Container(
                     height: 11,
                     child: LinearProgressIndicator(

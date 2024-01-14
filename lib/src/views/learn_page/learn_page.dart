@@ -28,7 +28,7 @@ class _HomeState extends State<LearnPage> {
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator();
+            return const Text('Loading...');
           } else if (snapshot.hasError) {
             return const Text('Something be wrong!');
           } else {
@@ -37,7 +37,7 @@ class _HomeState extends State<LearnPage> {
               child: CellCourse(
                 title: snapshot.data?['title'],
                 image: snapshot.data?['image'],
-                progress: course['progress'].toDouble(),
+                progress: course['progress'],
                 courseId: course['id'],
               ),
             );
@@ -89,11 +89,11 @@ class _HomeState extends State<LearnPage> {
                           children: [
                             SmallEarningCard(
                                 title: '7 level',
-                                headtitle: 'Minangkabau',
+                                headtitle: 'Vocabulary',
                                 subtitle: '7K participants'),
                             SmallEarningCard(
                                 title: '5 level',
-                                headtitle: 'Papua',
+                                headtitle: 'Grammar',
                                 subtitle: '5K participants'),
                           ],
                         ),

@@ -2,10 +2,13 @@ import 'package:bahasaku/src/api/fetchdata.dart';
 import 'package:bahasaku/src/common_widgets/circle_indicator.dart';
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
 import 'package:bahasaku/src/models/course_model.dart';
+import 'package:bahasaku/src/provider/user_provider.dart';
 import 'package:bahasaku/src/utils/TColors.dart';
 import 'package:bahasaku/src/utils/constant.dart';
+import 'package:bahasaku/src/views/learning_page/learning_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CourseDetailPage extends StatefulWidget {
@@ -26,6 +29,29 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
             course = data;
           })
         });
+  }
+
+  void handleLearnCourse() {
+    List courseList = Provider.of<UserProvider>(context, listen: false).courses;
+    List data = courseList.where((e) {
+      return e["id"] == course!.id;
+    }).toList();
+    if (data.isEmpty) {
+      List newCourse = [
+        ...courseList,
+        {
+          'id': course!.id,
+          'progress': [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      ];
+      Provider.of<UserProvider>(context, listen: false)
+          .updateCourses(newCourse);
+    }
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (_) => LearningPage(
+                courseId: widget.courseId, title: course!.title!)));
   }
 
   @override
@@ -237,7 +263,7 @@ class _CourseDetailPageState extends State<CourseDetailPage> {
                                                       BorderRadius.all(
                                                           Radius.circular(
                                                               50))))),
-                                      onPressed: () {},
+                                      onPressed: handleLearnCourse,
                                       child: const Padding(
                                         padding: EdgeInsets.only(
                                             top: 10, bottom: 10),
