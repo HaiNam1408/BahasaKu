@@ -29,13 +29,22 @@ class FirebaseServices {
           'avatar': FirebaseAuth.instance.currentUser!.photoURL,
           'email': FirebaseAuth.instance.currentUser!.email,
           'courses': [
-            {"id": "course001", "progress": 0},
-            {"id": "course002", "progress": 0},
-            {"id": "course003", "progress": 0}
+            {
+              "id": "course001",
+              "progress": [4, 1, 0, 0, 9, 0, 4, 0, 0, 0]
+            },
+            {
+              "id": "course002",
+              "progress": [3, 5, 0, 0, 3, 0, 2, 0, 0, 0]
+            },
+            {
+              "id": "course003",
+              "progress": [6, 0, 6, 0, 0, 4, 0, 0, 0, 0]
+            }
           ]
         };
         await UserController().createUser(userData);
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
           if (FirebaseAuth.instance.currentUser == null) {
             return const LoginPage();
           } else {
@@ -82,8 +91,13 @@ class FirebaseServices {
           .signInWithEmailAndPassword(email: email, password: password);
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('You are Logged in')));
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => const HomePage()));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
+        if (FirebaseAuth.instance.currentUser == null) {
+          return const LoginPage();
+        } else {
+          return const HomePage();
+        }
+      }));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         ScaffoldMessenger.of(context).showSnackBar(

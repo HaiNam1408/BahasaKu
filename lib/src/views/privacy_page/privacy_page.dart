@@ -1,5 +1,7 @@
 import 'package:bahasaku/src/common_widgets/prev_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class PrivacyPage extends StatefulWidget {
   const PrivacyPage({super.key});
@@ -11,6 +13,9 @@ class PrivacyPage extends StatefulWidget {
 class _PrivacyPageState extends State<PrivacyPage> {
   bool userNameVisible = true;
   bool passwordVisible = true;
+  User? userData = FirebaseAuth.instance.currentUser;
+  var now = DateTime.now();
+  var formatter = DateFormat('d MMM yyyy');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,8 +60,9 @@ class _PrivacyPageState extends State<PrivacyPage> {
                             width: 120,
                             child: Stack(
                               children: [
-                                const CircleAvatar(
-                                  backgroundImage: NetworkImage(
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(userData
+                                          ?.photoURL ??
                                       'https://www.shareicon.net/data/512x512/2016/05/24/770117_people_512x512.png'),
                                   radius: 55,
                                 ),
@@ -85,26 +91,22 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           const SizedBox(
                             height: 15,
                           ),
-                          const Column(
+                          Column(
                             children: [
                               Text(
-                                'John Doe',
-                                style: TextStyle(
+                                userData?.displayName ?? 'Guess',
+                                style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
+                              const SizedBox(height: 20),
+                              const Text(
                                 'Newbie',
                                 style:
                                     TextStyle(color: Colors.grey, fontSize: 13),
                               ),
                             ],
                           ),
-                          const SizedBox(
-                            height: 20,
-                          ),
+                          const SizedBox(height: 20),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
                             child: Column(
@@ -123,7 +125,8 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                       height: 10,
                                     ),
                                     TextFormField(
-                                      initialValue: "John Doe",
+                                      initialValue:
+                                          userData?.displayName ?? 'Guess',
                                       style: const TextStyle(
                                           color: Colors.grey,
                                           letterSpacing: 0.2,
@@ -162,7 +165,8 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                     ),
                                     TextFormField(
                                       obscureText: userNameVisible,
-                                      initialValue: "johnDOE",
+                                      initialValue:
+                                          userData?.displayName ?? 'Guess',
                                       style: const TextStyle(
                                           color: Colors.grey,
                                           letterSpacing: -0.24,
@@ -202,9 +206,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                                const SizedBox(height: 10),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -215,11 +217,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
+                                    const SizedBox(height: 10),
                                     TextFormField(
-                                      initialValue: "John.doe@gmail.com",
+                                      initialValue:
+                                          userData?.email ?? 'abc@gmail.com',
                                       style: const TextStyle(
                                           color: Colors.grey,
                                           letterSpacing: 0.2,
@@ -240,9 +241,7 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                     ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 10,
-                                ),
+                                const SizedBox(height: 10),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -253,12 +252,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500),
                                     ),
-                                    const SizedBox(
-                                      height: 10,
-                                    ),
+                                    const SizedBox(height: 10),
                                     TextFormField(
                                       obscureText: passwordVisible,
-                                      initialValue: "John Doe",
+                                      initialValue: "12345qwert",
                                       style: const TextStyle(
                                           color: Colors.grey,
                                           letterSpacing: 0.2,
@@ -306,10 +303,10 @@ class _PrivacyPageState extends State<PrivacyPage> {
                           ),
                           SizedBox(
                             width: MediaQuery.of(context).size.width,
-                            child: const Row(
+                            child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.only(left: 10),
                                   child: Column(
                                     crossAxisAlignment:
@@ -335,19 +332,19 @@ class _PrivacyPageState extends State<PrivacyPage> {
                                 ),
                                 Row(
                                   children: [
-                                    Text(
+                                    const Text(
                                       'Joined From',
                                       style: TextStyle(
                                           fontSize: 10,
                                           letterSpacing: 0.38,
                                           color: Colors.grey),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
-                                      '5 Jan 2022',
-                                      style: TextStyle(
+                                      formatter.format(now),
+                                      style: const TextStyle(
                                         fontSize: 12,
                                         letterSpacing: 0.38,
                                         fontWeight: FontWeight.w500,

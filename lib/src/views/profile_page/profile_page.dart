@@ -24,6 +24,7 @@ class ProfilePage extends StatelessWidget {
           actions: const [ActionButton()],
           backgroundColor: Colors.transparent,
           elevation: 0,
+          scrolledUnderElevation: 0,
         ),
         body: SizedBox(
           height: MediaQuery.of(context).size.height,
